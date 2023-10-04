@@ -3,6 +3,7 @@
 # FOL Group Names 
 1. Khyati Vyas
 2. Shubhangi Biradar
+3. Nikhil Bokade
 
 # About App
 Empower your fitness journey with our dynamic app, FitFiesta. Tailor your workouts with a vast exercise library, track progress seamlessly, and discover personalized plans designed to elevate your strength, endurance, and overall well-being. Join our fitness community and embark on a transformative journey to a healthier, stronger you.
