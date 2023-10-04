@@ -19,4 +19,4 @@ Empower your fitness journey with our dynamic app, FitFiesta. Tailor your workou
 9. Gamification -> Introduce game-like elements such as badges, points, or levels to make the app more engaging.
 10. Steps counter -> This will keep track of steps taken and set goals.
 11. Make Favourites list -> This will allow users to add some of their favourite workouts together and easily accessible.
-12. Community Support -> Create a community forum or chat feature where users can ask questions, share tips, and help each other.
+12. Dark mode -> User will be able to switch between dark and light mode according to his/her preference.
