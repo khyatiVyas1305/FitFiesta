@@ -2,6 +2,8 @@
 
 # FOL Group Names 
 1. Khyati Vyas
+2. Shubhangi Biradar
+3. Nikhil Bokade
 
 # About App
 Empower your fitness journey with our dynamic app, FitFiesta. Tailor your workouts with a vast exercise library, track progress seamlessly, and discover personalized plans designed to elevate your strength, endurance, and overall well-being. Join our fitness community and embark on a transformative journey to a healthier, stronger you.
@@ -15,7 +17,7 @@ Empower your fitness journey with our dynamic app, FitFiesta. Tailor your workou
 6. Biometric Authentication -> Integrate fingerprint or face recognition for secure and quick user logins.
 7. Workout of the Day -> Provide a daily or weekly featured workout for users seeking variety.
 8. Calorie Estimation -> Display estimated calorie burn for each workout session.
-9. Gamification -> Introduce game-like elements such as badges, points, or levels to make the app more engaging.
+9. Feedback or Survey -> Taking feedbacks from users to improve our app.
 10. Steps counter -> This will keep track of steps taken and set goals.
 11. Make Favourites list -> This will allow users to add some of their favourite workouts together and easily accessible.
-12. 
+12. Dark mode -> User will be able to switch between dark and light mode according to his/her preference.
