@@ -5,28 +5,32 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.fitfiesta.databinding.FragmentWorkoutPlansBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [WorkoutPlansFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class WorkoutPlansFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    lateinit var recyclerView: RecyclerView
+    var workoutList = ArrayList<WorkoutPlansData>()
+    lateinit var workoutPlansAdapter: WorkoutPlansAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
+
+
+    }
+
+    private fun addDataToArrayList() {
+        workoutList.add(WorkoutPlansData("Cardio",R.drawable.sretching))
+        workoutList.add(WorkoutPlansData("Yoga",R.drawable.yoga))
+        workoutList.add(WorkoutPlansData("Strength Training",R.drawable.weight_lifting))
+        workoutList.add(WorkoutPlansData("Endurance Training",R.drawable.running))
+        workoutList.add(WorkoutPlansData("Core Workouts",R.drawable.core_workout))
+        workoutList.add(WorkoutPlansData("Isometric Workouts",R.drawable.lunges))
+
     }
 
     override fun onCreateView(
@@ -34,25 +38,28 @@ class WorkoutPlansFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_workout_plans, container, false)
+
+        val view = inflater.inflate(R.layout.fragment_workout_plans, container, false)
+        recyclerView = view.findViewById(R.id.recyclerView)
+
+        recyclerView.hasFixedSize()
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        workoutPlansAdapter = WorkoutPlansAdapter(workoutList)
+        recyclerView.adapter = workoutPlansAdapter
+
+        addDataToArrayList()
+        return view
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment WorkoutPlansFragment.
-         */
+
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             WorkoutPlansFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+
                 }
             }
     }
