@@ -9,11 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 
 class WorkoutPlansAdapter(var workoutList: ArrayList<WorkoutPlansData>)  :RecyclerView.Adapter<WorkoutPlansAdapter.MyViewHolder>() {
 
-
+    var onItemClick : ((WorkoutPlansData) -> Unit)? = null
 
     class MyViewHolder (itemView: View):RecyclerView.ViewHolder(itemView){
         val cardImage = itemView.findViewById<ImageView>(R.id.cardImg)
         val cardText = itemView.findViewById<TextView>(R.id.cardText)
+    }
+
+    fun updateFilterList(workoutList: ArrayList<WorkoutPlansData>){
+        this.workoutList = workoutList
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(
@@ -25,8 +30,13 @@ class WorkoutPlansAdapter(var workoutList: ArrayList<WorkoutPlansData>)  :Recycl
     }
 
     override fun onBindViewHolder(holder: WorkoutPlansAdapter.MyViewHolder, position: Int) {
-        holder.cardImage.setImageResource(workoutList[position].image)
-        holder.cardText.text = workoutList[position].text
+        val workout = workoutList[position]
+        holder.cardImage.setImageResource(workout.image)
+        holder.cardText.text = workout.text
+
+        holder.itemView.setOnClickListener {
+           onItemClick?.invoke(workout)
+        }
     }
 
     override fun getItemCount(): Int {
