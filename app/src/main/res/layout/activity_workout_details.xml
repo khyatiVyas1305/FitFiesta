@@ -4,6 +4,186 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bgWhite"
     tools:context=".WorkoutDetailsActivity">
+
+    <ImageView
+        android:id="@+id/workoutImg"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:src="@drawable/jump_ropes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.037"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/workoutName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Workout name"
+        android:textColor="@color/darkBlue"
+        android:textSize="30dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/workoutImg"
+        app:layout_constraintVertical_bias="0.045" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="316dp"
+        android:minLines="6"
+        android:layout_margin="10dp"
+        android:text="DESCRIPTION"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/darkBlue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/workoutName"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:elevation="0dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="13dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.038"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bgWhite">
+
+            <TextView
+                android:id="@+id/workoutTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15 Min"
+                android:textColor="@color/darkPeach"
+                android:textSize="19dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.222"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_time"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.162"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView2"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:elevation="0dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="13dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.087"
+        app:layout_constraintStart_toEndOf="@+id/materialCardView"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bgWhite">
+
+            <TextView
+                android:id="@+id/workoutSetsTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3X25 sets"
+                android:textColor="@color/darkPeach"
+                android:textSize="19dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.222"
+                app:layout_constraintStart_toEndOf="@+id/setsImg"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/setsImg"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_sets"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.162"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="170dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="228dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView"
+        app:layout_constraintVertical_bias="0.119" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bgWhite">
+
+            <TextView
+                android:id="@+id/workoutCaloriesTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="190 Calories"
+                android:textColor="@color/darkPeach"
+                android:textSize="19dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.222"
+                app:layout_constraintStart_toEndOf="@+id/caloriesImg"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/caloriesImg"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_calories"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.162"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
