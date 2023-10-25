@@ -1,5 +1,6 @@
 package com.example.fitfiesta
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -79,6 +80,7 @@ class HomeFragment : Fragment() {
                 randomImg.setImageResource(R.drawable.sretching)
             }
         }
+
 
         return view
     }

@@ -27,7 +27,7 @@ class WorkoutDetailsActivity : AppCompatActivity() {
         calories = findViewById(R.id.workoutCaloriesTV)
 
         val workout = intent.getParcelableExtra<WorkoutListData>("workout")
-        if (workout != null){
+        if (workout != null) {
             workoutName.text = workout.exercise
         }
 
