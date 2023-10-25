@@ -54,6 +54,16 @@ class WorkoutDetailsActivity : AppCompatActivity() {
                 calories.text = "250 calories"
 
             }
+            "Lunge" ->{
+                workoutImg.setImageResource(R.drawable.lunges)
+                description.text = "Begin with a gentle warm-up to prepare your muscles for the workout. " +
+                        "Maintain an upright posture with shoulders back and core engaged during each lunge. " +
+                        "Ensure proper alignment of your knee over the ankle to protect your joints. " +
+                        "Breathe rhythmically, exhaling as you lunge and inhaling as you return to the starting position."
+                time.text = "30 Min"
+                sets.text = "10X3 sets"
+                calories.text = "320 calories"
+            }
         }
 
     }
