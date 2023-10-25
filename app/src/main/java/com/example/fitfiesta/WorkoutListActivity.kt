@@ -1,5 +1,6 @@
 package com.example.fitfiesta
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Switch
@@ -26,7 +27,15 @@ class WorkoutListActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         workoutListAdapter = WorkoutListAdapter(workoutsArrayList)
         recyclerView.adapter = workoutListAdapter
+
         addWorkouts()
+
+      workoutListAdapter.onItemClicked = {
+          val  intent = Intent(this, WorkoutDetailsActivity::class.java)
+          intent.putExtra("workout",it)
+          startActivity(intent)
+      }
+
     }
 
     private fun addWorkouts() {

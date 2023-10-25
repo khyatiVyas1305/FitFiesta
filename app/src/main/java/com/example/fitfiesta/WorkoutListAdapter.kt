@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 class WorkoutListAdapter(var workoutsArrayList: ArrayList<WorkoutListData>) : RecyclerView.Adapter<WorkoutListAdapter.MyViewHolder>() {
 
+    var onItemClicked: ((WorkoutListData) -> Unit)? = null
+
     class MyViewHolder  (itemView: View):RecyclerView.ViewHolder(itemView){
         val cardText = itemView.findViewById<TextView>(R.id.cardText)
     }
@@ -27,7 +29,12 @@ class WorkoutListAdapter(var workoutsArrayList: ArrayList<WorkoutListData>) : Re
     }
 
     override fun onBindViewHolder(holder: WorkoutListAdapter.MyViewHolder, position: Int) {
-        holder.cardText.text = workoutsArrayList[position].exercise
+        val workout = workoutsArrayList[position]
+        holder.cardText.text = workout.exercise
+
+        holder.itemView.setOnClickListener {
+            onItemClicked?.invoke(workout)
+        }
     }
 
 }
