@@ -5,6 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import java.util.Calendar
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +25,9 @@ class HomeFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var randomTV: TextView
+    lateinit var randomImg : ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,7 +41,46 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+
+        randomTV = view.findViewById(R.id.cardTextView)
+        randomImg = view.findViewById(R.id.cardImage)
+
+        val calendar = Calendar.getInstance()
+        val day = calendar[Calendar.DAY_OF_WEEK]
+
+        when (day) {
+            Calendar.SUNDAY -> {
+                randomTV.text = "Cardio"
+                randomImg.setImageResource(R.drawable.sretching)
+            }
+            Calendar.MONDAY -> {
+                randomTV.text = "Yoga"
+                randomImg.setImageResource(R.drawable.yoga)
+            }
+            Calendar.TUESDAY -> {
+                randomTV.text = "Strength Training"
+                randomImg.setImageResource(R.drawable.weight_lifting)
+            }
+            Calendar.WEDNESDAY -> {
+                randomTV.text = "Endurance Training"
+                randomImg.setImageResource(R.drawable.running)
+            }
+            Calendar.THURSDAY -> {
+                randomTV.text = "Core Workouts"
+                randomImg.setImageResource(R.drawable.core_workout)
+            }
+            Calendar.FRIDAY -> {
+                randomTV.text = "Isometric Workouts"
+                randomImg.setImageResource(R.drawable.lunges)
+            }
+            Calendar.SATURDAY -> {
+                randomTV.text = "Cardio"
+                randomImg.setImageResource(R.drawable.sretching)
+            }
+        }
+
+        return view
     }
 
     companion object {
@@ -57,3 +103,4 @@ class HomeFragment : Fragment() {
             }
     }
 }
+
