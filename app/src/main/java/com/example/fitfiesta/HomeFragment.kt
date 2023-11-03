@@ -80,8 +80,6 @@ class HomeFragment : Fragment() {
                 randomImg.setImageResource(R.drawable.sretching)
             }
         }
-
-
         return view
         
     }
