@@ -83,6 +83,7 @@ class HomeFragment : Fragment() {
 
 
         return view
+        
     }
 
     companion object {
