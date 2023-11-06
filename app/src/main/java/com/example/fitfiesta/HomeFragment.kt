@@ -1,6 +1,11 @@
 package com.example.fitfiesta
 
+import android.content.Context
 import android.content.Intent
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,7 +26,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), SensorEventListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -29,11 +34,23 @@ class HomeFragment : Fragment() {
     lateinit var randomTV: TextView
     lateinit var randomImg : ImageView
 
+    private var sensorManager: SensorManager? = null
+    private var stepCounter: Sensor? = null
+    private var steps = 0
+    private lateinit var stepsTextView: TextView
+    private lateinit var progressBar: View
+    private val MAX_STEPS = 6000
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+        }
+        sensorManager = activity?.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        stepCounter = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
+        stepCounter?.let {
+            sensorManager?.registerListener(this, it, SensorManager.SENSOR_DELAY_UI)
         }
     }
 
@@ -46,6 +63,9 @@ class HomeFragment : Fragment() {
 
         randomTV = view.findViewById(R.id.cardTextView)
         randomImg = view.findViewById(R.id.cardImage)
+
+        stepsTextView = view.findViewById(R.id.stepsTextView)
+        progressBar = view.findViewById(R.id.progressBar)
 
         val calendar = Calendar.getInstance()
         val day = calendar[Calendar.DAY_OF_WEEK]
@@ -102,6 +122,36 @@ class HomeFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        event?.let {
+            if (it.sensor.type == Sensor.TYPE_STEP_COUNTER) {
+                steps = it.values[0].toInt()
+                stepsTextView.text = steps.toString()
+
+                val progress = if (steps > MAX_STEPS) MAX_STEPS else steps
+                val width = (progress * resources.displayMetrics.widthPixels / MAX_STEPS)
+                progressBar.layoutParams.width = width
+                progressBar.requestLayout()
+            }
+        }
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+        
+    }
+
+    override fun onPause() {
+        super.onPause()
+        sensorManager?.unregisterListener(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        stepCounter?.let {
+            sensorManager?.registerListener(this, it, SensorManager.SENSOR_DELAY_UI)
+        }
     }
 }
 
