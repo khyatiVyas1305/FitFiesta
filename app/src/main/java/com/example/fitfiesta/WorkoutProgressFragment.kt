@@ -1,12 +1,14 @@
 package com.example.fitfiesta
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
+import java.util.concurrent.Flow
 
 
 class WorkoutProgressFragment : Fragment() {
@@ -35,17 +37,29 @@ class WorkoutProgressFragment : Fragment() {
         caloriesProgressBar = view.findViewById(R.id.caloriesProgress)
         caloriesCount = view.findViewById(R.id.caloriesCount)
 
-        var steps = stepsCount.toString()
-        var calories = caloriesCount.toString()
+        var steps = getStepsFromDataSource()
+        var calories = getCaloriesFromDataSource()
 
         stepsProgressBar.apply {
-            setProgressWithAnimation(steps.toFloat())
+            setProgressWithAnimation(steps)
         }
 
         caloriesProgressBar.apply {
-            setProgressWithAnimation(calories.toFloat())
+            setProgressWithAnimation(calories)
         }
 
         return view
+    }
+
+    private fun getStepsFromDataSource(): Float {
+        // Replace this with your logic to retrieve the current steps value
+        // from your data source (e.g., Google Fit API, sensor data, etc.)
+        var steps = stepsCount.text.toString().toFloat()
+        return steps
+    }
+
+    private fun getCaloriesFromDataSource(): Float{
+        var calories = caloriesCount.text.toString().toFloat()
+        return calories
     }
 }
