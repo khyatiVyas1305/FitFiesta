@@ -7,7 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
+import java.lang.Integer.parseInt
 import java.util.concurrent.Flow
 
 
@@ -17,12 +20,27 @@ class WorkoutProgressFragment : Fragment() {
     lateinit var caloriesProgressBar: CircularProgressBar
     lateinit var stepsCount: TextView
     lateinit var caloriesCount: TextView
+    private lateinit var sharedViewModel: SharedViewModel
+
+    var userSteps: Int = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
 
         }
+
+        // Initialize the sharedViewModel
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+//
+//        // Observe changes to totalSteps and update UI
+//        sharedViewModel.totalSteps.observe(viewLifecycleOwner, Observer { steps ->
+//            stepsCount.text = steps.toString()
+//            stepsProgressBar.apply {
+//                setProgressWithAnimation(steps.toFloat())
+//            }
+//        })
     }
 
     override fun onCreateView(
@@ -37,12 +55,21 @@ class WorkoutProgressFragment : Fragment() {
         caloriesProgressBar = view.findViewById(R.id.caloriesProgress)
         caloriesCount = view.findViewById(R.id.caloriesCount)
 
-        var steps = getStepsFromDataSource()
-        var calories = getCaloriesFromDataSource()
+        // Observe changes to totalSteps and update UI
+        sharedViewModel.totalSteps.observe(viewLifecycleOwner, Observer { steps ->
+            // Check if the fragment's view is available before updating UI
+            if (view != null) {
+                stepsCount.text = steps.toString()
+                stepsProgressBar.apply {
+                    setProgressWithAnimation(steps.toFloat())
+                }
+            }
+        })
 
-        stepsProgressBar.apply {
-            setProgressWithAnimation(steps)
-        }
+        //var steps = getStepsFromDataSource()
+        var calories = getCaloriesFromDataSource()
+        caloriesCount.text = calories.toInt().toString()
+
 
         caloriesProgressBar.apply {
             setProgressWithAnimation(calories)
@@ -51,15 +78,53 @@ class WorkoutProgressFragment : Fragment() {
         return view
     }
 
-    private fun getStepsFromDataSource(): Float {
-        // Replace this with your logic to retrieve the current steps value
-        // from your data source (e.g., Google Fit API, sensor data, etc.)
-        var steps = stepsCount.text.toString().toFloat()
-        return steps
-    }
 
     private fun getCaloriesFromDataSource(): Float{
-        var calories = caloriesCount.text.toString().toFloat()
+        var calories = 0F
+        var temp = stepsCount.text.toString().toInt()
+        when(temp){
+            in 0.. 100 -> {
+                calories = 20F
+            }
+            in 100..200 -> {
+                calories = 30F
+            }
+            in 200..400 ->{
+                calories = 45F
+            }
+            in 400..700 ->{
+                calories = 50F
+            }
+            in 700..1400 ->{
+                calories = 55F
+            }
+            in 1400..2000 ->{
+                calories = 60F
+            }
+            in 2000..3000 ->{
+                calories = 70F
+            }
+            in 3000..4000 ->{
+                calories = 100F
+            }
+            in 4000..6000 ->{
+                calories = 130F
+            }
+            else ->{
+                calories = 230F
+            }
+        }
         return calories
     }
+
+//    fun receiveData(updatedSteps: Int) {
+//        var userSteps = updatedSteps
+//        stepsCount.text = updatedSteps.toString()
+//        stepsProgressBar.apply {
+//            setProgressWithAnimation(userSteps.toFloat())
+//        }
+//        Log.d("progress", "DATA RECEIVED $userSteps")
+//
+//
+//    }
 }

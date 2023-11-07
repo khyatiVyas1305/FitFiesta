@@ -1,19 +1,19 @@
 package com.example.fitfiesta
 
 import android.content.Context
-import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
+import androidx.lifecycle.ViewModelProvider
 import java.util.Calendar
 
 // TODO: Rename parameter arguments, choose names that match
@@ -40,6 +40,7 @@ class HomeFragment : Fragment(), SensorEventListener {
     private lateinit var stepsTextView: TextView
     private lateinit var progressBar: View
     private val MAX_STEPS = 6000
+    private lateinit var sharedViewModel: SharedViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +53,9 @@ class HomeFragment : Fragment(), SensorEventListener {
         stepCounter?.let {
             sensorManager?.registerListener(this, it, SensorManager.SENSOR_DELAY_UI)
         }
+
+        // Initialize the sharedViewModel
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -100,6 +104,12 @@ class HomeFragment : Fragment(), SensorEventListener {
                 randomImg.setImageResource(R.drawable.sretching)
             }
         }
+
+
+//        stepsDataCommunicator = requireActivity() as StepsDataCommunicator
+//        stepsDataCommunicator.passData(steps)
+//        Log.d("home","$steps")
+
         return view
         
     }
@@ -134,6 +144,26 @@ class HomeFragment : Fragment(), SensorEventListener {
                 val width = (progress * resources.displayMetrics.widthPixels / MAX_STEPS)
                 progressBar.layoutParams.width = width
                 progressBar.requestLayout()
+
+                // Update the sharedViewModel with the new step count
+                sharedViewModel.totalSteps.value = steps
+
+                // val workoutProgressFragment = WorkoutProgressFragment()
+
+//                val bundle = Bundle()
+//                bundle.putInt("steps",steps)
+//                workoutProgressFragment.arguments = bundle
+
+//        parentFragmentManager.beginTransaction().apply {
+//            replace(R.id.stepsCount, workoutProgressFragment)
+//                .commit()
+//        }
+
+
+//                (requireActivity().supportFragmentManager.findFragmentByTag("workoutProgressFragment") as WorkoutProgressFragment?)?.receiveData(
+//                    20
+//                )
+
             }
         }
     }
