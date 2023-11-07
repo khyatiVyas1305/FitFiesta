@@ -104,8 +104,7 @@ class HomeFragment : Fragment(), SensorEventListener {
                 randomImg.setImageResource(R.drawable.running)
             }
         }
-
-
+        
 //        stepsDataCommunicator = requireActivity() as StepsDataCommunicator
 //        stepsDataCommunicator.passData(steps)
 //        Log.d("home","$steps")
