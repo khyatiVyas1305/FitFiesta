@@ -100,8 +100,8 @@ class HomeFragment : Fragment(), SensorEventListener {
                 randomImg.setImageResource(R.drawable.lunges)
             }
             Calendar.SATURDAY -> {
-                randomTV.text = "Cardio"
-                randomImg.setImageResource(R.drawable.sretching)
+                randomTV.text = "Endurance Training"
+                randomImg.setImageResource(R.drawable.running)
             }
         }
 
