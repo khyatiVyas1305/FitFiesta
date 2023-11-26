@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
-import java.lang.Integer.parseInt
-import java.util.concurrent.Flow
 
 
 class WorkoutProgressFragment : Fragment() {
@@ -21,6 +21,11 @@ class WorkoutProgressFragment : Fragment() {
     lateinit var stepsCount: TextView
     lateinit var caloriesCount: TextView
     private lateinit var sharedViewModel: SharedViewModel
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: ProgressListAdapter
+    var progressArrayList = mutableListOf<String>()
+
+
 
     var userSteps: Int = 0
 
@@ -54,6 +59,7 @@ class WorkoutProgressFragment : Fragment() {
         stepsCount = view.findViewById(R.id.stepsCount)
         caloriesProgressBar = view.findViewById(R.id.caloriesProgress)
         caloriesCount = view.findViewById(R.id.caloriesCount)
+        recyclerView = view.findViewById(R.id.recyclerViewProgress)
 
         // Observe changes to totalSteps and update UI
         sharedViewModel.totalSteps.observe(viewLifecycleOwner, Observer { steps ->
@@ -74,6 +80,23 @@ class WorkoutProgressFragment : Fragment() {
         caloriesProgressBar.apply {
             setProgressWithAnimation(calories)
         }
+
+
+        // Initialize RecyclerView and its adapter
+        adapter = ProgressListAdapter(progressArrayList)
+
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = adapter
+        Log.d("recyclerview", "list: $progressArrayList")
+
+//
+//        // Observe changes in the itemList
+//        sharedViewModel.itemList.observe(viewLifecycleOwner, Observer { itemList ->
+//            // Update the RecyclerView when the itemList changes
+//            Log.d("RecyclerView", "Item count: ${itemList.size}")
+//            Log.d("Fragment", "ItemList changed: $itemList")
+//            adapter.updateList(itemList)
+//        })
 
         return view
     }
@@ -115,6 +138,13 @@ class WorkoutProgressFragment : Fragment() {
             }
         }
         return calories
+    }
+
+
+    fun updateRecyclerView(newData: String) {
+        progressArrayList.add(newData)
+        adapter.notifyDataSetChanged()
+        Log.d("recyclerview", "Updated list: $progressArrayList")
     }
 
 //    fun receiveData(updatedSteps: Int) {

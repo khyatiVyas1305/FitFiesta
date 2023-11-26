@@ -199,6 +199,7 @@
         android:layout_height="wrap_content"
         android:text="COMPLETED"
         android:textStyle="bold"
+        android:visibility="gone"
         android:textColor="@color/bgWhite"
         android:backgroundTint="@color/blue"
         app:layout_constraintBottom_toBottomOf="parent"

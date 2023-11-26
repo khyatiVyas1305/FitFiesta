@@ -3,8 +3,10 @@ package com.example.fitfiesta
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Switch
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.w3c.dom.Text
@@ -35,6 +37,9 @@ class WorkoutListActivity : AppCompatActivity() {
           intent.putExtra("workout",it)
           startActivity(intent)
       }
+
+
+
 
     }
 
@@ -68,7 +73,7 @@ class WorkoutListActivity : AppCompatActivity() {
                workoutsArrayList.add(WorkoutListData("Side Plank Pose"))
                workoutsArrayList.add(WorkoutListData("Fish Pose"))
            }
-           "Strength Training" ->{
+           "Strength" ->{
                workoutsArrayList.add(WorkoutListData("Squat"))
                workoutsArrayList.add(WorkoutListData("Plank"))
                workoutsArrayList.add(WorkoutListData("Lunge"))
@@ -79,7 +84,7 @@ class WorkoutListActivity : AppCompatActivity() {
                workoutsArrayList.add(WorkoutListData("Triceps dips"))
                workoutsArrayList.add(WorkoutListData("Push-ups"))
            }
-           "Endurance Training" ->{
+           "Endurance" ->{
                workoutsArrayList.add(WorkoutListData("Plank"))
                workoutsArrayList.add(WorkoutListData("Body weight squats"))
                workoutsArrayList.add(WorkoutListData("Walking lunges"))
@@ -88,7 +93,7 @@ class WorkoutListActivity : AppCompatActivity() {
                workoutsArrayList.add(WorkoutListData("Weight lifting"))
                workoutsArrayList.add(WorkoutListData("Shoulder stretching"))
            }
-           "Core Workouts" ->{
+           "Core" ->{
                workoutsArrayList.add(WorkoutListData("Sit-ups"))
                workoutsArrayList.add(WorkoutListData("Flutter kicks"))
                workoutsArrayList.add(WorkoutListData("Bridge"))
@@ -99,7 +104,7 @@ class WorkoutListActivity : AppCompatActivity() {
                workoutsArrayList.add(WorkoutListData("V-ups"))
                workoutsArrayList.add(WorkoutListData("Plank jack"))
            }
-           "Isometric Workouts" -> {
+           "Isometric" -> {
                workoutsArrayList.add(WorkoutListData("Low Squat"))
                workoutsArrayList.add(WorkoutListData("Split Squat"))
                workoutsArrayList.add(WorkoutListData("Wall sits"))

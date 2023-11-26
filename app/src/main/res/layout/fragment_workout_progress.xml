@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bgWhite"
+    android:id="@+id/workoutProgressFragment"
     tools:context=".WorkoutProgressFragment">
 
 <!--    <com.db.williamchart.view.BarChartView-->
@@ -146,6 +147,16 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/caloriesCardView"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp"
+        tools:listitem="@layout/workout_list_item"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fitfiesta.databinding.FragmentWorkoutPlansBinding
 import java.util.Locale
 
 
@@ -31,10 +30,10 @@ class WorkoutPlansFragment : Fragment() {
     private fun addDataToArrayList() {
         workoutList.add(WorkoutPlansData("Cardio",R.drawable.sretching))
         workoutList.add(WorkoutPlansData("Yoga",R.drawable.yoga))
-        workoutList.add(WorkoutPlansData("Strength Training",R.drawable.weight_lifting))
-        workoutList.add(WorkoutPlansData("Endurance Training",R.drawable.running))
-        workoutList.add(WorkoutPlansData("Core Workouts",R.drawable.core_workout))
-        workoutList.add(WorkoutPlansData("Isometric Workouts",R.drawable.lunges))
+        workoutList.add(WorkoutPlansData("Strength",R.drawable.weight_lifting))
+        workoutList.add(WorkoutPlansData("Endurance",R.drawable.running))
+        workoutList.add(WorkoutPlansData("Core",R.drawable.core_workout))
+        workoutList.add(WorkoutPlansData("Isometric",R.drawable.lunges))
 
     }
 
