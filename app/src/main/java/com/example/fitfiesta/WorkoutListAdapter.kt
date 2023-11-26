@@ -25,7 +25,7 @@ class WorkoutListAdapter(var workoutsArrayList: ArrayList<WorkoutListData>) : Re
                 if(isFavorited){
                     favoriteButton.setImageResource(R.drawable.ic_heart_filled)
                     itemView.context?.let {
-                        Toast.makeText(it, "Added to favorites", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(it, "Added  to favorites", Toast.LENGTH_SHORT).show()
                     }
                 } else{
                     favoriteButton.setImageResource(R.drawable.ic_heart_outline)
