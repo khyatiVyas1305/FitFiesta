@@ -25,7 +25,7 @@ class WorkoutListActivity : AppCompatActivity() {
 
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        workoutListAdapter = WorkoutListAdapter(workoutsArrayList)
+        workoutListAdapter = WorkoutListAdapter(workoutsArrayList, this)
         recyclerView.adapter = workoutListAdapter
 
         addWorkouts()
