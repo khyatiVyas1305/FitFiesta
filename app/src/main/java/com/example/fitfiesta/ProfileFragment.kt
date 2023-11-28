@@ -1,10 +1,16 @@
 package com.example.fitfiesta
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.SwitchCompat
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +27,10 @@ class ProfileFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var switch: SwitchCompat
+    lateinit var sharedPreferences: SharedPreferences
+    lateinit var buttonNext: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,7 +44,29 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        val view = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        switch = view.findViewById(R.id.darkSwitch)
+        sharedPreferences = requireContext().getSharedPreferences("Mode", Context.MODE_PRIVATE)
+
+        val isNightMode = sharedPreferences.getBoolean("night_mode", false)
+        switch.isChecked = isNightMode
+
+        switch.setOnCheckedChangeListener { _, isChecked ->
+            val mode = if (isChecked) {
+                AppCompatDelegate.MODE_NIGHT_YES
+            } else {
+                AppCompatDelegate.MODE_NIGHT_NO
+            }
+            AppCompatDelegate.setDefaultNightMode(mode)
+            saveNightModeState(isChecked)
+        }
+
+        return view
+    }
+
+    private fun saveNightModeState(isNightMode: Boolean) {
+        sharedPreferences.edit().putBoolean("night_mode", isNightMode).apply()
     }
 
     companion object {
