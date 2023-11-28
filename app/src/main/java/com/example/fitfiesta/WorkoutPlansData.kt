@@ -7,8 +7,7 @@ data class WorkoutPlansData(var text: String, var image: Int): Parcelable{
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
         parcel.readInt()
-    ) {
-    }
+    )
 
     override fun describeContents(): Int {
         return 0

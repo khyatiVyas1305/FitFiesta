@@ -1,59 +1,155 @@
 package com.example.fitfiesta
 
+import android.app.AlarmManager
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Context.NOTIFICATION_SERVICE
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Switch
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    //lateinit var notificationBtn: Button
+    lateinit var notificationSwitch: Switch
+    private lateinit var sharedViewModel: SharedViewModel
+    var userSteps: Int = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        val view = inflater.inflate(R.layout.fragment_profile, container, false)
+        // Initialize the sharedViewModel
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+        val notificationManager =
+            requireActivity().getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotificationChannel(notificationManager)
+        }
+
+
+        //notificationBtn = view.findViewById(R.id.notificationBtn)
+        notificationSwitch = view.findViewById(R.id.notificationSwitch)
+//        notificationBtn.setOnClickListener {
+//            scheduleNotification()
+//        }
+
+        // Observe changes to totalSteps and update UI
+        sharedViewModel.totalSteps.observe(viewLifecycleOwner, Observer { steps ->
+            // Check if the fragment's view is available before updating UI
+            if (view != null) {
+                userSteps = steps
+            }
+        })
+
+        notificationSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                // User enabled notifications
+                scheduleNotification()
+            } else {
+                // User disabled notifications
+                cancelNotification()
+            }
+
+            // Save the state in preferences
+            saveNotificationStateToPreferences(isChecked)
+        }
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createNotificationChannel(notificationManager: NotificationManager) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val name = "Notification channel"
+        val desc = "Notification description"
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val channel = NotificationChannel(channelID, name, importance)
+        channel.description = desc
+            notificationManager.createNotificationChannel(channel)
+        }
+
     }
+
+    private fun scheduleNotification() {
+        val intent = Intent(requireContext(), Notification::class.java)
+        val title = "You're doing great!"
+        val message = "You completed $userSteps."
+        intent.putExtra(titleExtra,title)
+        intent.putExtra(messageExtra,message)
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            requireContext(),
+            notificationID,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
+        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        // Set up repeating alarm every 30 minutes
+        val intervalMillis = 2 * 60 * 1000 // 30 minutes
+        val triggerMillis = SystemClock.elapsedRealtime() + intervalMillis
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setExactAndAllowWhileIdle(
+                AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                triggerMillis,
+                pendingIntent
+            )
+        } else {
+            alarmManager.setRepeating(
+                AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                triggerMillis,
+                intervalMillis.toLong(),
+                pendingIntent
+            )
+        }
+
+        Toast.makeText(requireContext(),"You have enabled Notifications!",Toast.LENGTH_SHORT).show()
+    }
+
+    private fun saveNotificationStateToPreferences(enabled: Boolean) {
+        // Save the state to SharedPreferences
+        val sharedPreferences =
+            requireContext().getSharedPreferences("NotificationPreferences", Context.MODE_PRIVATE)
+        sharedPreferences.edit().putBoolean("notification_enabled", enabled).apply()
+    }
+
+    private fun cancelNotification() {
+        val intent = Intent(requireContext(), Notification::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(
+            requireContext(),
+            notificationID,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.cancel(pendingIntent)
+
+        // Additionally, you may want to cancel any existing notifications in the NotificationManager
+        val notificationManager =
+            requireContext().getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.cancel(notificationID)
+    }
+
+
 }

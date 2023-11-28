@@ -42,9 +42,9 @@ class WorkoutListAdapter(var workoutsArrayList: ArrayList<WorkoutListData>) : Re
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): WorkoutListAdapter.MyViewHolder {
+    ): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.workout_list_item,parent,false)
-        return WorkoutListAdapter.MyViewHolder(view)
+        return MyViewHolder(view)
     }
 
 
@@ -52,7 +52,7 @@ class WorkoutListAdapter(var workoutsArrayList: ArrayList<WorkoutListData>) : Re
         return workoutsArrayList.size
     }
 
-    override fun onBindViewHolder(holder: WorkoutListAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val workout = workoutsArrayList[position]
         holder.cardText.text = workout.exercise
 

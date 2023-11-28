@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(HomeFragment())
         sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
 
+
         //BOTTOM NAVIGATION
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
@@ -42,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
 
     private fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
