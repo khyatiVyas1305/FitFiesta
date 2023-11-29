@@ -48,7 +48,7 @@ class WorkoutListAdapter(
 
             if (isFavorited) {
                 holder.favoriteButton.setImageResource(R.drawable.ic_heart_filled)
-                Toast.makeText(context, "Added ${workout.exercise} to favorites", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Added ${workout.exercise}  to favorites", Toast.LENGTH_SHORT).show()
                 favWorkoutList?.add(workout.exercise)
             } else {
                 holder.favoriteButton.setImageResource(R.drawable.ic_heart_outline)
