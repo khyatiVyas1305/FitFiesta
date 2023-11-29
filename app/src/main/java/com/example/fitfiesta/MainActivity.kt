@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+//import com.example.fitfiesta.Notification.Companion.OPEN_HOME_FRAGMENT
 import com.example.fitfiesta.databinding.ActivityMainBinding
 import java.util.Calendar
 
@@ -19,7 +20,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        replaceFragment(HomeFragment())
+            replaceFragment(HomeFragment())
+
         sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
 
 
@@ -47,6 +49,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
+
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frame_layout,fragment)
         fragmentTransaction.commit()

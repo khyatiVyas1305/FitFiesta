@@ -21,6 +21,8 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+//import com.example.fitfiesta.Notification.Companion.OPEN_HOME_FRAGMENT
+import java.util.Calendar
 
 
 class ProfileFragment : Fragment() {
@@ -64,9 +66,11 @@ class ProfileFragment : Fragment() {
             if (isChecked) {
                 // User enabled notifications
                 scheduleNotification()
+                scheduleDailyNotification()
             } else {
                 // User disabled notifications
-                cancelNotification()
+                cancelNotification(1)
+                cancelNotification(2)
             }
 
             // Save the state in preferences
@@ -92,20 +96,23 @@ class ProfileFragment : Fragment() {
     private fun scheduleNotification() {
         val intent = Intent(requireContext(), Notification::class.java)
         val title = "You're doing great!"
-        val message = "You completed $userSteps."
+        val message = "You completed $userSteps steps."
         intent.putExtra(titleExtra,title)
         intent.putExtra(messageExtra,message)
+//        intent.putExtra(NOTIFICATION_ACTION_EXTRA, OPEN_HOME_FRAGMENT)
+
+        val notificationId = 2 // Unique identifier
 
         val pendingIntent = PendingIntent.getBroadcast(
             requireContext(),
-            notificationID,
+            notificationId,
             intent,
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
         val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-        // Set up repeating alarm every 30 minutes
-        val intervalMillis = 2 * 60 * 1000 // 30 minutes
+        // Set up repeating alarm
+        val intervalMillis = 2 * 60 * 1000 // minutes
         val triggerMillis = SystemClock.elapsedRealtime() + intervalMillis
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -126,6 +133,55 @@ class ProfileFragment : Fragment() {
         Toast.makeText(requireContext(),"You have enabled Notifications!",Toast.LENGTH_SHORT).show()
     }
 
+    private fun scheduleDailyNotification() {
+        val intent = Intent(requireContext(), Notification::class.java)
+        val title = "Good Morning"
+        val message = "Rise and shine! Did you check today's Nutrition Fact?"
+        intent.putExtra(titleExtra, title)
+        intent.putExtra(messageExtra, message)
+//        intent.putExtra(NOTIFICATION_ACTION_EXTRA, OPEN_HOME_FRAGMENT)
+
+        val notificationId = 1 // Unique identifier for the daily notification
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            requireContext(),
+            notificationId,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        // Set up the alarm to trigger every day at 7 AM
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = System.currentTimeMillis()
+        calendar.set(Calendar.HOUR_OF_DAY, 19)
+        calendar.set(Calendar.MINUTE, 10)
+        calendar.set(Calendar.SECOND, 0)
+
+        val triggerMillis = calendar.timeInMillis
+        if (triggerMillis <= System.currentTimeMillis()) {
+            // If the trigger time has already passed today, set it for tomorrow
+            calendar.add(Calendar.DAY_OF_YEAR, 1)
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setExactAndAllowWhileIdle(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                pendingIntent
+            )
+        } else {
+            alarmManager.setRepeating(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                AlarmManager.INTERVAL_DAY,
+                pendingIntent
+            )
+        }
+    }
+
+
     private fun saveNotificationStateToPreferences(enabled: Boolean) {
         // Save the state to SharedPreferences
         val sharedPreferences =
@@ -133,11 +189,11 @@ class ProfileFragment : Fragment() {
         sharedPreferences.edit().putBoolean("notification_enabled", enabled).apply()
     }
 
-    private fun cancelNotification() {
+    private fun cancelNotification(notificationId: Int) {
         val intent = Intent(requireContext(), Notification::class.java)
         val pendingIntent = PendingIntent.getBroadcast(
             requireContext(),
-            notificationID,
+            notificationId,
             intent,
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
@@ -148,7 +204,7 @@ class ProfileFragment : Fragment() {
         // Additionally, you may want to cancel any existing notifications in the NotificationManager
         val notificationManager =
             requireContext().getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.cancel(notificationID)
+        notificationManager.cancel(notificationId)
     }
 
 
