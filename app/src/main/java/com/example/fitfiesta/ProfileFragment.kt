@@ -156,7 +156,7 @@ class ProfileFragment : Fragment() {
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = System.currentTimeMillis()
         calendar.set(Calendar.HOUR_OF_DAY, 19)
-        calendar.set(Calendar.MINUTE, 10)
+        calendar.set(Calendar.MINUTE, 25)
         calendar.set(Calendar.SECOND, 0)
 
         val triggerMillis = calendar.timeInMillis
