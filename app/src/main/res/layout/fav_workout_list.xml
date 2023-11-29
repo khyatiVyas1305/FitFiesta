@@ -8,12 +8,12 @@
     android:elevation="0dp"
     app:cardElevation="13dp"
     app:cardUseCompatPadding="true"
-    android:background="@color/bgWhite">
+    android:background="@color/background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bgWhite"
+        android:background="@color/bgColor"
         android:padding="13dp">
 
         <TextView
@@ -23,7 +23,7 @@
             android:fontFamily="@font/roboto_medium"
             android:text="WORKOUT"
             android:textAlignment="center"
-            android:textColor="#A76F6F"
+            android:textColor="@color/workoutText"
             android:textSize="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
 

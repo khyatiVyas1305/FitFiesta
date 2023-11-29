@@ -4,19 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bgWhite"
+    android:background="@color/background"
     tools:context=".WorkoutDetailsActivity">
 
     <ImageView
         android:id="@+id/workoutImg"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:src="@drawable/jump_ropes"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
         android:scaleType="centerInside"
+        android:src="@drawable/jump_ropes"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.037"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintVertical_bias="0.037" />
 
     <TextView
         android:id="@+id/workoutName"
@@ -24,7 +27,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_medium"
         android:text="Workout name"
-        android:textColor="@color/darkBlue"
+        android:textColor="@color/blue"
         android:textSize="30dp"
         android:layout_marginLeft="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -44,7 +47,7 @@
         android:text="DESCRIPTION"
         android:textAlignment="gravity"
         android:fontFamily="sans-serif"
-        android:textColor="@color/darkBlue"
+        android:textColor="@color/blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/workoutName"
         app:layout_constraintVertical_bias="0.0"
@@ -59,6 +62,7 @@
         android:elevation="0dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="13dp"
+        app:cardBackgroundColor="@color/bgColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.038"
@@ -69,14 +73,14 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/bgWhite">
+            android:background="@color/bgColor">
 
             <TextView
                 android:id="@+id/workoutTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="15 Min"
-                android:textColor="@color/darkPeach"
+                android:textColor="@color/workoutText"
                 android:textSize="19dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -116,14 +120,14 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/bgWhite">
+            android:background="@color/bgColor">
 
             <TextView
                 android:id="@+id/workoutSetsTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="3X25 sets"
-                android:textColor="@color/darkPeach"
+                android:textColor="@color/workoutText"
                 android:textSize="19dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -161,14 +165,14 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/bgWhite">
+            android:background="@color/bgColor">
 
             <TextView
                 android:id="@+id/workoutCaloriesTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="190 Calories"
-                android:textColor="@color/darkPeach"
+                android:textColor="@color/workoutText"
                 android:textSize="19dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -200,7 +204,7 @@
         android:text="COMPLETED"
         android:textStyle="bold"
         android:textColor="@color/bgWhite"
-        android:backgroundTint="@color/blue"
+        android:backgroundTint="@color/darkBlue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

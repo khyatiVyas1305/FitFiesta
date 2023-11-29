@@ -8,4 +8,8 @@
     <color name="blue">#435B66</color>
     <color name="darkBlue">#2D4356</color>
 
+    <color name="textColor">#000000</color>
+    <color name="bgColor">#FFFFFF</color>
+    <color name="background">#FFFFFF</color>
+    <color name="workoutText">#A76F6F</color>
 </resources>

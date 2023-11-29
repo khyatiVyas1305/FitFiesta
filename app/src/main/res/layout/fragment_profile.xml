@@ -7,10 +7,12 @@
     tools:context=".ProfileFragment">
 
     <androidx.cardview.widget.CardView
+        android:background="@color/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@color/bgColor"
             android:layout_width="match_parent"
             android:layout_height="131dp">
 
@@ -21,6 +23,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="52dp"
                 android:text="Dark / Light Mode"
+                android:textColor="@color/textColor"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
