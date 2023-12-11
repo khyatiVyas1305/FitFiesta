@@ -49,11 +49,11 @@ class WorkoutListAdapter(
             if (isFavorited) {
                 holder.favoriteButton.setImageResource(R.drawable.ic_heart_filled)
                 Toast.makeText(context, "Added ${workout.exercise} to favorites", Toast.LENGTH_SHORT).show()
-                favWorkoutList?.add(workout.exercise)
+                favWorkoutList.add(workout.exercise)
             } else {
                 holder.favoriteButton.setImageResource(R.drawable.ic_heart_outline)
                 Toast.makeText(context, "Removed ${workout.exercise} from favorites", Toast.LENGTH_SHORT).show()
-                favWorkoutList?.remove(workout.exercise)
+                favWorkoutList.remove(workout.exercise)
             }
 
             sharedPrefs.edit().putStringSet("favWorkoutList", favWorkoutList).apply()

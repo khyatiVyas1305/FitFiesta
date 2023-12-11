@@ -24,12 +24,12 @@ class WorkoutPlansAdapter(var workoutList: ArrayList<WorkoutPlansData>)  :Recycl
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): WorkoutPlansAdapter.MyViewHolder {
+    ): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item,parent,false)
         return MyViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: WorkoutPlansAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val workout = workoutList[position]
         holder.cardImage.setImageResource(workout.image)
         holder.cardText.text = workout.text

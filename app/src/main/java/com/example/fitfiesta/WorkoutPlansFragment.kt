@@ -21,13 +21,6 @@ class WorkoutPlansFragment : Fragment() {
     var workoutList = ArrayList<WorkoutPlansData>()
     lateinit var workoutPlansAdapter: WorkoutPlansAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-
-    }
-
     private fun addDataToArrayList() {
         workoutList.add(WorkoutPlansData("Cardio",R.drawable.sretching))
         workoutList.add(WorkoutPlansData("Yoga",R.drawable.yoga))

@@ -82,19 +82,23 @@ class ProfileFragment : Fragment() {
             }
         })
 
+        val enabled = sharedPreferences.getBoolean("notification_enabled",false)
+        notificationSwitch.isChecked = enabled
+
         notificationSwitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 // User enabled notifications
                 scheduleNotification()
                 scheduleDailyNotification()
+
             } else {
                 // User disabled notifications
                 cancelNotification(1)
                 cancelNotification(2)
             }
-
             // Save the state in preferences
             saveNotificationStateToPreferences(isChecked)
+
         }
 
         val isNightMode = sharedPreferences.getBoolean("night_mode", false)
@@ -153,20 +157,20 @@ class ProfileFragment : Fragment() {
         val intervalMillis = 1 * 60 * 1000 // minutes
         val triggerMillis = SystemClock.elapsedRealtime() + intervalMillis
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            alarmManager.setExactAndAllowWhileIdle(
-                AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                triggerMillis,
-                pendingIntent
-            )
-        } else {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            alarmManager.setExactAndAllowWhileIdle(
+//                AlarmManager.ELAPSED_REALTIME_WAKEUP,
+//                triggerMillis,
+//                pendingIntent
+//            )
+//        } else {
             alarmManager.setRepeating(
                 AlarmManager.ELAPSED_REALTIME_WAKEUP,
                 triggerMillis,
                 intervalMillis.toLong(),
                 pendingIntent
             )
-        }
+
 
         Toast.makeText(requireContext(),"You have enabled Notifications!", Toast.LENGTH_SHORT).show()
     }
@@ -222,8 +226,8 @@ class ProfileFragment : Fragment() {
 
     private fun saveNotificationStateToPreferences(enabled: Boolean) {
         // Save the state to SharedPreferences
-        val sharedPreferences =
-            requireContext().getSharedPreferences("NotificationPreferences", Context.MODE_PRIVATE)
+//        val sharedPreferences =
+//            requireContext().getSharedPreferences("NotificationPreferences", Context.MODE_PRIVATE)
         sharedPreferences.edit().putBoolean("notification_enabled", enabled).apply()
     }
 
@@ -243,6 +247,8 @@ class ProfileFragment : Fragment() {
         val notificationManager =
             requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.cancel(notificationId)
+        Toast.makeText(requireContext(),"Notifications disabled!", Toast.LENGTH_SHORT).show()
+
     }
 
 
