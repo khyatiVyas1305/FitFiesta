@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
+    android:id="@+id/DetailView"
     tools:context=".WorkoutDetailsActivity">
 
     <ImageView
@@ -198,13 +199,13 @@
     </com.google.android.material.card.MaterialCardView>
 
     <Button
-        android:id="@+id/completeBtn"
+        android:id="@+id/downloadBtn"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:text="COMPLETED"
+        android:text="Download"
         android:textStyle="bold"
         android:textColor="@color/bgWhite"
-        android:backgroundTint="@color/darkBlue"
+        android:backgroundTint="@color/darkPeach"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
