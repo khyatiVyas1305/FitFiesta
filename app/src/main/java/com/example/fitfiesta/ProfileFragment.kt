@@ -7,19 +7,20 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Switch
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import java.util.Calendar
@@ -43,6 +44,7 @@ class ProfileFragment : Fragment() {
     lateinit var notificationSwitch: SwitchCompat
     lateinit var sharedPreferences: SharedPreferences
     private lateinit var sharedViewModel: SharedViewModel
+    lateinit var feedbackTextView: TextView
     lateinit var buttonNext: Button
     var userSteps: Int = 0
 
@@ -64,6 +66,7 @@ class ProfileFragment : Fragment() {
 
         switch = view.findViewById(R.id.darkSwitch)
         sharedPreferences = requireContext().getSharedPreferences("Mode", Context.MODE_PRIVATE)
+        feedbackTextView = view.findViewById(R.id.feedbackText)
 
         // Initialize the sharedViewModel
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
@@ -114,12 +117,22 @@ class ProfileFragment : Fragment() {
             saveNightModeState(isChecked)
         }
 
+        feedbackTextView.setOnClickListener {
+            val googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeT3pPS44tjfTZ3vBu0jFjQp8cYeJTXvycWTo5K05K6tEzlIg/viewform?usp=sf_link"
+
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(googleFormUrl)
+            startActivity(intent)
+        }
+
         return view
     }
 
     private fun saveNightModeState(isNightMode: Boolean) {
         sharedPreferences.edit().putBoolean("night_mode", isNightMode).apply()
     }
+
+
 
 
     @RequiresApi(Build.VERSION_CODES.O)
