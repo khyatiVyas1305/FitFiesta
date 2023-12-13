@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class WorkoutListAdapter(
     var workoutsArrayList: ArrayList<WorkoutListData>,
-    private val context: Context // Pass the context to access SharedPreferences
+    private val context: Context
 ) : RecyclerView.Adapter<WorkoutListAdapter.MyViewHolder>() {
 
     var onItemClicked: ((WorkoutListData) -> Unit)? = null
@@ -60,11 +60,11 @@ class WorkoutListAdapter(
                 favWorkoutList.remove(workout.exercise)
             }
 
-            // Save updated favWorkoutList to SharedPreferences
+
             sharedPrefs.edit().putStringSet("favWorkoutList", favWorkoutList).apply()
         }
 
-        // Set the favorite button state based on whether it's favorited or not
+        
         val drawableRes = if (favWorkoutList.contains(workout.exercise)) {
             R.drawable.ic_heart_filled
         } else {
