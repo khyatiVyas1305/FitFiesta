@@ -10,12 +10,19 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
+
+
 class WorkoutListAdapter(
     var workoutsArrayList: ArrayList<WorkoutListData>,
     private val context: Context // Pass the context to access SharedPreferences
 ) : RecyclerView.Adapter<WorkoutListAdapter.MyViewHolder>() {
 
     var onItemClicked: ((WorkoutListData) -> Unit)? = null
+
+    // Retrieve the favorite workout list from SharedPreferences
+    private val sharedPrefs = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+    private var favWorkoutList: MutableSet<String> =
+        sharedPrefs.getStringSet("favWorkoutList", LinkedHashSet()) ?: LinkedHashSet()
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val cardText = itemView.findViewById<TextView>(R.id.cardText)
@@ -36,15 +43,12 @@ class WorkoutListAdapter(
         val workout = workoutsArrayList[position]
         holder.cardText.text = workout.exercise
 
-        val sharedPrefs = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        val favWorkoutList = sharedPrefs.getStringSet("favWorkoutList", LinkedHashSet())
-
         holder.itemView.setOnClickListener {
             onItemClicked?.invoke(workout)
         }
 
         holder.favoriteButton.setOnClickListener {
-            val isFavorited = !favWorkoutList?.contains(workout.exercise)!!
+            val isFavorited = !favWorkoutList.contains(workout.exercise)
 
             if (isFavorited) {
                 holder.favoriteButton.setImageResource(R.drawable.ic_heart_filled)
@@ -56,8 +60,22 @@ class WorkoutListAdapter(
                 favWorkoutList.remove(workout.exercise)
             }
 
+            // Save updated favWorkoutList to SharedPreferences
             sharedPrefs.edit().putStringSet("favWorkoutList", favWorkoutList).apply()
-            Log.d("List Contents", favWorkoutList.toString())
         }
+
+        // Set the favorite button state based on whether it's favorited or not
+        val drawableRes = if (favWorkoutList.contains(workout.exercise)) {
+            R.drawable.ic_heart_filled
+        } else {
+            R.drawable.ic_heart_outline
+        }
+        holder.favoriteButton.setImageResource(drawableRes)
     }
 }
+
+
+
+
+
+
