@@ -108,12 +108,115 @@ class WorkoutDetailsActivity : AppCompatActivity() {
                 calories.text = "250 calories"
 
             }
+            "Burpees" ->{
+                workoutImg.setImageResource(R.drawable.burpees_set)
+                description.text = "Begin in a standing position with your feet shoulder-width apart and arms at your sides." +
+                        "Lower your body into a squat position by bending your knees and bringing your hands to the floor in front of you." +
+                        "From the squat position, jump your feet back, landing in a plank position with your body in a straight line from head to heels." +
+                        "Perform a push-up by lowering your chest to the ground and then pushing back up to the plank position." +
+                        "Jump your feet back toward your hands, returning to the squat position." +"Explosively jump straight up into the air, reaching your arms overhead." +
+                        "Land softly and immediately go back into the next repetition by moving into the squat position."
+                time.text = "15-20 Min"
+                sets.text = "1X20 sets"
+                calories.text = "280 calories"
+
+            }
+            "Squat Jumps" ->{
+                workoutImg.setImageResource(R.drawable.squat_jumps)
+                description.text = "Stand with your feet shoulder-width apart." + "Keep your chest up, shoulders back, and engage your core muscles." +
+                        "Lower your body into a squat position by bending your knees and pushing your hips back." +
+                        "Keep your back straight, and make sure your knees are in line with your toes." +
+                        "From the squat position, explosively push through your feet and jump straight up into the air." +
+                        "Swing your arms back during the descent into the squat and then swing them forward as you jump." +
+                        "Land softly and immediately go back into the next repetition by moving into the squat position. " +
+                        "As you descend from the jump, land softly on the balls of your feet." +
+                        "Bend your knees slightly to absorb the impact, and ensure your knees are in line with your toes." +
+                        "After landing, immediately go back into the squat position and prepare for the next jump." +
+                        "Perform the exercise in a continuous, fluid motion."
+
+                time.text = "15 Min"
+                sets.text = "1X15 sets"
+                calories.text = "120 calories"
+
+            }
+            "High Knees" ->{
+                workoutImg.setImageResource(R.drawable.high_knees)
+                description.text = "Stand with your feet hip-width apart and arms hanging at your sides." +
+                        "Tighten your core muscles to stabilize your torso." +
+                        "Lift your right knee as high as possible towards your chest while simultaneously swinging your left arm forward.." +
+                        "Keep your back straight, and use your core to lift your knee." +
+                        "As you lower your right knee, immediately lift your left knee towards your chest while swinging your right arm forward." +
+                        "Continue alternating legs in a running or marching motion." +
+                        "Breathe in a controlled manner, focusing on deep breaths as you maintain the high knees movement."
+
+                time.text = "5 Min"
+                sets.text = "2X10 sets"
+                calories.text = "126 calories"
+
+            }
+            "Squat" ->{
+                workoutImg.setImageResource(R.drawable.squats)
+                description.text = "Stand with your feet shoulder-width apart. Keep your chest up, shoulders back, and your gaze forward." +
+                        "Tighten your core muscles to stabilize your spine." +
+                        "Hinge at your hips and begin to lower your body as if you're sitting back into a chair." +
+                        "Bend your knees and lower your hips down and back." +
+                        "Lower your body until your thighs are parallel to the ground or as far as your flexibility allows." +
+                        "Inhale as you lower into the squat. Exhale as you push back up."
+
+                time.text = "25 Min"
+                sets.text = "3X10 sets"
+                calories.text = "225 calories"
+
+            }
+            "Jogging in place" ->{
+                workoutImg.setImageResource(R.drawable.jogging_in_place)
+                description.text = "Stand with your feet hip-width apart. Keep your posture upright, shoulders back, and core engaged. " +
+                        "Lift your knees up and start jogging in place. " +
+                        "Aim to bring your knees to a height that feels comfortable for your fitness level. " +
+                        "Swing your arms naturally in coordination with your leg movements. " +
+                        "Jog at a pace that suits your fitness level. Breathe naturally and steadily. "
+
+                time.text = "10 Min"
+                sets.text = "1 sets"
+                calories.text = "130 calories"
+
+            }
+            "Standing Forward Bend" ->{
+                workoutImg.setImageResource(R.drawable.standing_forward_bending)
+                description.text = "Begin in a standing position with your feet hip-width apart. Allow your arms to hang down by your sides. " +
+                        "Inhale deeply, elongating your spine as you do so. On the exhale, start to hinge at your hips, leading with your chest." +
+                        "Keep your back straight as you fold forward, avoiding rounding your spine. " +
+                        "Bring your hands to the floor on either side of your feet if possible." +
+                        "If reaching the floor is challenging, you can place your hands on your shins or use yoga blocks for support. " +
+                        "Stay in the forward bend for 30 seconds to 1 minute, breathing deeply and relaxing into the stretch."
+
+                time.text = "10 Min"
+                sets.text = "1X10 sets"
+                calories.text = "100 calories"
+
+            }
+            "Extended Triangle Pose" ->{
+                workoutImg.setImageResource(R.drawable.extended_triangle_pose)
+                description.text = "Begin in a standing position at the top of your mat with your feet about 3 to 4 feet apart. " +
+                        "Ensure your feet are parallel to each other. Turn your right foot out 90 degrees so that your toes are pointing to the top of the mat. " +
+                        "Keep your left foot slightly turned in, maintaining a comfortable angle. " +
+                        "Extend your arms parallel to the floor, reaching them out to the sides. Keep your shoulders relaxed and facing forward. `" +
+                        "Keep your back straight as you fold forward, avoiding rounding your spine. " +
+                        "Bring your hands to the floor on either side of your feet if possible." +
+                        "If reaching the floor is challenging, you can place your hands on your shins or use yoga blocks for support. " +
+                        "Allow your head to hang naturally, with your neck relaxed."
+
+                time.text = "10 Min"
+                sets.text = "1X10 sets"
+                calories.text = "100 calories"
+
+            }
             "Lunge" ->{
                 workoutImg.setImageResource(R.drawable.lunges)
                 description.text = "Begin with a gentle warm-up to prepare your muscles for the workout. " +
                         "Maintain an upright posture with shoulders back and core engaged during each lunge. " +
                         "Ensure proper alignment of your knee over the ankle to protect your joints. " +
-                        "Breathe rhythmically, exhaling as you lunge and inhaling as you return to the starting position."
+                        "Breathe rhythmically, exhaling as you lunge and inhaling as you return to the starting position. "
                 time.text = "30 Min"
                 sets.text = "10X3 sets"
                 calories.text = "320 calories"

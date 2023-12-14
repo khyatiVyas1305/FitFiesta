@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,7 +12,7 @@
     <ImageView
         android:id="@+id/workoutImg"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="260dp"
         android:layout_marginStart="70dp"
         android:layout_marginEnd="70dp"
         android:scaleType="centerInside"
@@ -70,6 +71,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/description"
         app:layout_constraintVertical_bias="0.0">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -151,12 +153,13 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView3"
         android:layout_width="170dp"
         android:layout_height="60dp"
+        android:layout_marginEnd="160dp"
         android:elevation="0dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="13dp"
-        android:layout_marginEnd="160dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -202,16 +205,16 @@
         android:id="@+id/downloadBtn"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:text="Download"
-        android:textStyle="bold"
-        android:textColor="@color/bgWhite"
         android:backgroundTint="@color/darkPeach"
+        android:text="Download"
+        android:textColor="@color/bgWhite"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView3"
+        app:layout_constraintVertical_bias="0.709" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

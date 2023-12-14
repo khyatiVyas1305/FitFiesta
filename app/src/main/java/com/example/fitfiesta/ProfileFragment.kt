@@ -191,7 +191,7 @@ class ProfileFragment : Fragment() {
     private fun scheduleDailyNotification() {
         val intent = Intent(requireContext(), Notification::class.java)
         val title = "Good Evening"
-        val message = "Rise and shine! Did you check today's Nutrition Fact?"
+        val message = "Just Wondering! Did you check today's Nutrition Fact?"
         intent.putExtra(titleExtra, title)
         intent.putExtra(messageExtra, message)
 //        intent.putExtra(NOTIFICATION_ACTION_EXTRA, OPEN_HOME_FRAGMENT)
@@ -210,8 +210,8 @@ class ProfileFragment : Fragment() {
         // Set up the alarm to trigger every day at 7 AM
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = System.currentTimeMillis()
-        calendar.set(Calendar.HOUR_OF_DAY, 23)
-        calendar.set(Calendar.MINUTE, 3)
+        calendar.set(Calendar.HOUR_OF_DAY, 21)
+        calendar.set(Calendar.MINUTE, 8)
         calendar.set(Calendar.SECOND, 0)
 
         val triggerMillis = calendar.timeInMillis
@@ -220,20 +220,13 @@ class ProfileFragment : Fragment() {
             calendar.add(Calendar.DAY_OF_YEAR, 1)
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            alarmManager.setExactAndAllowWhileIdle(
-                AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                pendingIntent
-            )
-        } else {
             alarmManager.setRepeating(
                 AlarmManager.RTC_WAKEUP,
                 calendar.timeInMillis,
                 AlarmManager.INTERVAL_DAY,
                 pendingIntent
             )
-        }
+
     }
 
 
