@@ -49,7 +49,7 @@ class WorkoutListActivity : AppCompatActivity() {
 
        when(planTV.text){
            "Cardio" -> {
-               workoutsArrayList.add(WorkoutListData("Jump Ropes"))
+               workoutsArrayList.add(WorkoutListData("Jump Ropes "))
                workoutsArrayList.add(WorkoutListData("Stair Climbing"))
                workoutsArrayList.add(WorkoutListData("Burpees"))
                workoutsArrayList.add(WorkoutListData("Squat Jumps"))
